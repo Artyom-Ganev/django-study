@@ -13,6 +13,11 @@ class Named(models.Model):
 
 
 class Human(models.Model):
+    SEX_CHOICES = (
+        ('m', u"мужской"),
+        ('w', u"женский"),
+    )
+    sex = models.CharField(max_length=1, verbose_name=u"Пол", choices=SEX_CHOICES)
     surname = models.CharField(verbose_name=u'Фамилия', null=False, blank=False, max_length=50)
     name = models.CharField(verbose_name=u'Имя', null=False, blank=False, max_length=50)
     middle_name = models.CharField(verbose_name=u'Отчество', null=False, blank=False, max_length=50)
@@ -49,7 +54,7 @@ class Faculty(Named):
 
 
 class Department(Named):
-    department = models.ForeignKey(Faculty)
+    faculty = models.ForeignKey(Faculty)
     head = models.OneToOneField(Employee)
 
     class Meta:

@@ -1,0 +1,7 @@
+{% extends "card.html" %}
+{% block content %}
+    <p><a href="/departments/{{ group.department.id }}">{{ group.department }}</a></p>
+    <p>Группа: {{ group.name }}<p></p>
+    <p>Год: {{ group.year }}</p>
+    <p>Специальность: <a href="/specialities/{{ group.speciality.id }}/">{{ group.speciality }}</a></p>
+{% endblock %}

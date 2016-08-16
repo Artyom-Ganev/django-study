@@ -6,8 +6,6 @@
 
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"/>
-    {#    <script type="text/javascript" src="students/static/jquery.min.js"></script>#}
-    {#    <script type="text/javascript" src="../static/script.js"></script>#}
 </head>
 <body>
 <div id="menu">
@@ -20,13 +18,7 @@
         <li><a href="/students/">Студенты</a></li>
     </ul>
 </div>
-<div>
-    <table rules="all">
-        {% block content %}
-        {% endblock %}
-    </table>
-</div>
-<a href="javascript:history.back()">Назад</a>
-<a href="javascript:history.forward()">Вперёд</a>
+{% block content %}
+{% endblock %}
 </body>
 </html>

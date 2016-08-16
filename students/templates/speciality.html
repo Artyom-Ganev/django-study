@@ -1,0 +1,7 @@
+{% extends "card.html" %}
+{% block content %}
+    <p>Факультет: {{ speciality.department.faculty }}</p>
+    <p>Кафедра: {{ speciality.department }}</p>
+    <p>>Код: {{ speciality.code }}</p>
+    <p>Наименование: {{ speciality.name }}</p>
+{% endblock %}

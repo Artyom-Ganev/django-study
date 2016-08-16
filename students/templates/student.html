@@ -1,0 +1,8 @@
+{% extends "card.html" %}
+{% block content %}
+    <p>Группа: <a href="/groups/{{ student.group.id }}/">{{ student.group }}</a></p>
+    <p>Фамилия: {{ student.surname }}</p>
+    <p>Имя: {{ student.name }}</p>
+    <p>Отчество: {{ student.middle_name }}</p>
+    <p>Дата рождения: {{ student.birth_date }}</p>
+{% endblock %}

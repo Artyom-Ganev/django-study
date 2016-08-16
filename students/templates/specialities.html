@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+    <thead>
+    <tr class="table_head">
+        <td>Факультет</td>
+        <td>Кафедра</td>
+        <td>Код специальности</td>
+        <td>Наименование специальности</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for speciality in specialities %}
+        <tr>
+            <td>{{ speciality.department.faculty }}</td>
+            <td>{{ speciality.department }}</td>
+            <td><a href="/specialities/{{ speciality.id }}/">{{ speciality.code }}</a></td>
+            <td><a href="/specialities/{{ speciality.id }}/">{{ speciality.name }}</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+{% endblock %}
