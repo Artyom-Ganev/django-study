@@ -4,4 +4,25 @@
     <p>Группа: {{ group.name }}<p></p>
     <p>Год: {{ group.year }}</p>
     <p>Специальность: <a href="/specialities/{{ group.speciality.id }}/">{{ group.speciality }}</a></p>
+    {% if students.count > 0 %}
+        <p>Список студентов:</p>
+        <table rules="all">
+            <thead>
+            <tr class="table_head">
+                <td>Фамилия</td>
+                <td>Имя</td>
+                <td>Отчество</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for student in students %}
+                <tr>
+                    <td><a href="/students/{{ student.number }}/">{{ student.surname }}</a></td>
+                    <td><a href="/students/{{ student.number }}/">{{ student.name }}</a></td>
+                    <td><a href="/students/{{ student.number }}/">{{ student.middle_name }}</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}

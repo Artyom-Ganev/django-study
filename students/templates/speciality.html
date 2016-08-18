@@ -1,7 +1,27 @@
 {% extends "card.html" %}
 {% block content %}
-    <p>Факультет: {{ speciality.department.faculty }}</p>
-    <p>Кафедра: {{ speciality.department }}</p>
+    <p>Факультет: <a href="/faculties/{{ speciality.department.faculty.id }}/">{{ speciality.department.faculty }}</a>
+    </p>
+    <p>Кафедра: <a href="/departments/{{ speciality.department.id }}/">{{ speciality.department }}</a></p>
     <p>>Код: {{ speciality.code }}</p>
     <p>Наименование: {{ speciality.name }}</p>
+    {% if groups.count > 0 %}
+        <p>Список групп:</p>
+        <table rules="all">
+            <thead>
+            <tr class="table_head">
+                <td>Наименование</td>
+                <td>Год создания</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for group in groups %}
+                <tr>
+                    <td><a href="/groups/{{ group.id }}/">{{ group.name }}</a></td>
+                    <td>{{ group.year }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}

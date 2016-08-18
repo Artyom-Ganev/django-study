@@ -11,8 +11,9 @@
     <tbody>
     {% for speciality in specialities %}
         <tr>
-            <td>{{ speciality.department.faculty }}</td>
-            <td>{{ speciality.department }}</td>
+            <td><a href="/faculties/{{ speciality.department.faculty.id }}/">{{ speciality.department.faculty }}</a>
+            </td>
+            <td><a href="/departments/{{ speciality.department.id }}/">{{ speciality.department }}</a></td>
             <td><a href="/specialities/{{ speciality.id }}/">{{ speciality.code }}</a></td>
             <td><a href="/specialities/{{ speciality.id }}/">{{ speciality.name }}</a></td>
         </tr>

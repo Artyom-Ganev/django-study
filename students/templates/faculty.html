@@ -2,4 +2,23 @@
 {% block content %}
     <p>Наименование: {{ faculty.name }}</p>
     <p>Декан: {{ faculty.dean }}</p>
+    {% if departments.count > 0 %}
+        <p>Кафедры:</p>
+        <table rules="all">
+            <thead>
+            <tr class="table_head">
+                <td>Наименование</td>
+                <td>Заведующий</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for department in departments %}
+                <tr>
+                    <td><a href="/departments/{{ department.id }}/">{{ department.name }}</a></td>
+                    <td>{{ department.head }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}
