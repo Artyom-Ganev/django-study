@@ -1,5 +1,8 @@
 from django.contrib.auth import login
+from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.http import HttpResponseRedirect
+from django.views.generic.base import View
 from django.views.generic.edit import FormView
 
 
@@ -24,3 +27,10 @@ class LoginFormView(FormView):
         self.user = form.get_user()
         login(self.request, self.user)
         return super(LoginFormView, self).form_valid(form)
+
+
+class LogoutView(View):
+    @staticmethod
+    def get(request):
+        logout(request)
+        return HttpResponseRedirect("/")
