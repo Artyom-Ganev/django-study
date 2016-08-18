@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block main %}
-    <p>Факультет: {{ department.faculty }}</p>
+    <p>Факультет: <a href="/faculties/{{ speciality.department.faculty.id }}">{{ department.faculty }}</a></p>
     <p>Наименование: {{ department.name }}</p>
     <p>Заведующий: {{ department.head }}</p>
     {% if specialities.count > 0 %}
@@ -8,7 +8,6 @@
         <table rules="all">
             <thead>
             <tr class="table_head">
-                <td>Факультет</td>
                 <td>Код специальности</td>
                 <td>Наименование специальности</td>
             </tr>
@@ -16,7 +15,6 @@
             <tbody>
             {% for speciality in specialities %}
                 <tr>
-                    <td>{{ speciality.department.faculty }}</td>
                     <td><a href="/specialities/{{ speciality.id }}/">{{ speciality.code }}</a></td>
                     <td><a href="/specialities/{{ speciality.id }}/">{{ speciality.name }}</a></td>
                 </tr>

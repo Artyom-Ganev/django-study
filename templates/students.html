@@ -7,6 +7,7 @@
             <td>Фамилия</td>
             <td>Имя</td>
             <td>Отчество</td>
+            <td>№ с/б</td>
         </tr>
         </thead>
         <tbody>
@@ -16,6 +17,7 @@
                 <td><a href="/students/{{ student.number }}/">{{ student.surname }}</a></td>
                 <td><a href="/students/{{ student.number }}/">{{ student.name }}</a></td>
                 <td><a href="/students/{{ student.number }}/">{{ student.middle_name }}</a></td>
+                <td><a href="/students/{{ student.number }}/">{{ student.number }}</a></td>
             </tr>
         {% endfor %}
         </tbody>
