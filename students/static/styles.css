@@ -1,3 +1,4 @@
+@charset "utf-8";
 body {
     background-color: whitesmoke;
 }
@@ -34,4 +35,20 @@ a:hover {
 #menu li {
     display: inline-block;
     padding: 10px;
+}
+
+#footer {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+}
+
+.nav_button {
+    border-radius: 6px;
+    background-color: darkgray;
+    padding: 5px 10px 5px 10px;
+    display: inline-block;
+    margin-bottom: 10px;
 }

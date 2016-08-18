@@ -1,5 +1,5 @@
-{% extends "card.html" %}
-{% block content %}
+{% extends "base.html" %}
+{% block main %}
     <p>Группа: <a href="/groups/{{ student.group.id }}/">{{ student.group }}</a></p>
     <p>Фамилия: {{ student.surname }}</p>
     <p>Имя: {{ student.name }}</p>

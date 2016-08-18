@@ -1,17 +1,19 @@
 {% extends "base.html" %}
-{% block content %}
-    <thead>
-    <tr class="table_head">
-        <td>Наименование</td>
-        <td>Декан</td>
-    </tr>
-    </thead>
-    <tbody>
-    {% for faculty in faculties %}
-        <tr>
-            <td><a href="/faculties/{{ faculty.id }}/"> {{ faculty.name }}</a></td>
-            <td>{{ faculty.dean }}</td>
+{% block main %}
+    <table rules="all">
+        <thead>
+        <tr class="table_head">
+            <td>Наименование</td>
+            <td>Декан</td>
         </tr>
-    {% endfor %}
-    </tbody>
+        </thead>
+        <tbody>
+        {% for faculty in faculties %}
+            <tr>
+                <td><a href="/faculties/{{ faculty.id }}/"> {{ faculty.name }}</a></td>
+                <td>{{ faculty.dean }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

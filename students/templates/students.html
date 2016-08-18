@@ -1,21 +1,23 @@
 {% extends "base.html" %}
-{% block content %}
-    <thead>
-    <tr class="table_head">
-        <td>Группа</td>
-        <td>Фамилия</td>
-        <td>Имя</td>
-        <td>Отчество</td>
-    </tr>
-    </thead>
-    <tbody>
-    {% for student in students %}
-        <tr>
-            <td><a href="/groups/{{ student.group.id }}/">{{ student.group }}</a></td>
-            <td><a href="/students/{{ student.number }}/">{{ student.surname }}</a></td>
-            <td><a href="/students/{{ student.number }}/">{{ student.name }}</a></td>
-            <td><a href="/students/{{ student.number }}/">{{ student.middle_name }}</a></td>
+{% block main %}
+    <table rules="all">
+        <thead>
+        <tr class="table_head">
+            <td>Группа</td>
+            <td>Фамилия</td>
+            <td>Имя</td>
+            <td>Отчество</td>
         </tr>
-    {% endfor %}
-    </tbody>
+        </thead>
+        <tbody>
+        {% for student in students %}
+            <tr>
+                <td><a href="/groups/{{ student.group.id }}/">{{ student.group }}</a></td>
+                <td><a href="/students/{{ student.number }}/">{{ student.surname }}</a></td>
+                <td><a href="/students/{{ student.number }}/">{{ student.name }}</a></td>
+                <td><a href="/students/{{ student.number }}/">{{ student.middle_name }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

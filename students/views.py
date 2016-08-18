@@ -22,7 +22,7 @@ def get_template_with_detail(objects, name, detail, detail_name):
 
 
 def index(request):
-    template = loader.get_template("index.html")
+    template = loader.get_template("base.html")
     return HttpResponse(template.render())
 
 

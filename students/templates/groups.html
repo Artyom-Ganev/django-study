@@ -1,21 +1,24 @@
 {% extends "base.html" %}
-{% block content %}
-    <thead>
-    <tr class="table_head">
-        <td>Наименование</td>
-        <td>Год создания</td>
-        <td>Специальность</td>
-        <td>Кафедра</td>
-    </tr>
-    </thead>
-    <tbody>
-    {% for group in groups %}
-        <tr>
-            <td><a href="/groups/{{ group.id }}/">{{ group.name }}</a></td>
-            <td>{{ group.year }}</td>
-            <td><a href="/specialities/{{ group.speciality.id }}/">{{ group.speciality }}</a></td>
-            <td><a href="/departments/{{ group.speciality.department.id }}">{{ group.speciality.department }}</a></td>
+{% block main %}
+    <table rules="all">
+        <thead>
+        <tr class="table_head">
+            <td>Наименование</td>
+            <td>Год создания</td>
+            <td>Специальность</td>
+            <td>Кафедра</td>
         </tr>
-    {% endfor %}
-    </tbody>
+        </thead>
+        <tbody>
+        {% for group in groups %}
+            <tr>
+                <td><a href="/groups/{{ group.id }}/">{{ group.name }}</a></td>
+                <td>{{ group.year }}</td>
+                <td><a href="/specialities/{{ group.speciality.id }}/">{{ group.speciality }}</a></td>
+                <td><a href="/departments/{{ group.speciality.department.id }}">{{ group.speciality.department }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
