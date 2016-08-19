@@ -64,16 +64,25 @@ def specialitiy(request, spec_id):
         obj = Speciality.objects.get(id=spec_id)
     except Speciality.DoesNotExist:
         raise Http404
-    detail = Group.objects.filter(speciality=spec_id)
+    if request.user.is_authenticated():
+        detail = Group.objects.filter(speciality=spec_id)
+    else:
+        detail = None
     return HttpResponse(get_template_with_detail(obj, "speciality", detail, "groups"))
 
 
 def groups(request):
+    if not request.user.is_authenticated():
+        template = loader.get_template("login_error.html")
+        return HttpResponse(template.render())
     objects = Group.objects.all()
     return HttpResponse(get_template(objects, "groups"))
 
 
 def group(request, group_id):
+    if not request.user.is_authenticated():
+        template = loader.get_template("login_error.html")
+        return HttpResponse(template.render())
     try:
         obj = Group.objects.get(id=group_id)
     except Group.DoesNotExist:
@@ -83,11 +92,17 @@ def group(request, group_id):
 
 
 def students(request):
+    if not request.user.is_authenticated():
+        template = loader.get_template("login_error.html")
+        return HttpResponse(template.render())
     objects = Student.objects.all()
     return HttpResponse(get_template(objects, "students"))
 
 
 def student(request, student_number):
+    if not request.user.is_authenticated():
+        template = loader.get_template("login_error.html")
+        return HttpResponse(template.render())
     try:
         obj = Student.objects.get(number=student_number)
     except Student.DoesNotExist:

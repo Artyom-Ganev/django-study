@@ -25,20 +25,37 @@ a:hover {
     color: darkorchid;
 }
 
+.login {
+    position: fixed;
+    right: 20px;
+    margin-bottom: 20px;
+}
+
+#login {
+
+}
+
 #register {
 
 }
 
 #menu {
+    position: relative;
+    top: 30px;
     background-color: darkgray;
     border-radius: 6px;
-    margin: 0 auto 20px;
+    margin: 20px auto 20px;
     text-align: center;
 }
 
 #menu li {
     display: inline-block;
     padding: 10px;
+}
+
+#main {
+    position: relative;
+    top: 30px
 }
 
 #footer {

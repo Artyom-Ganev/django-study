@@ -10,6 +10,7 @@
     <script type="text/javascript" src="{% static 'script.js' %}" charset="utf-8"></script>
 </head>
 <body>
+<div class="login"><a href="/login/">Авторизация</a></div>
 <div id="menu">
     <ul>
         <li><a href="/">Главная</a></li>
@@ -20,7 +21,7 @@
         <li><a href="/students">Студенты</a></li>
     </ul>
 </div>
-<div class="main">
+<div id="main">
     {% block main %}
     {% endblock %}
 </div>
