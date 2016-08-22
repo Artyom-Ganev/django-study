@@ -1,7 +1,7 @@
 # coding: utf-8
 from django.http import Http404
 from django.http import HttpResponse
-from django.template import Context
+from django.template import RequestContext
 from django.template import loader
 
 from students.models import Student, Group, Speciality, Faculty, Department
@@ -9,26 +9,25 @@ from students.models import Student, Group, Speciality, Faculty, Department
 html = ".html"
 
 
-def get_template(objects, name):
+def get_template(request, objects, name):
     template = loader.get_template(name + html)
-    context = Context({name: objects})
+    context = RequestContext(request, {name: objects})
     return template.render(context)
 
 
-def get_template_with_detail(objects, name, detail, detail_name):
+def get_template_with_detail(request, objects, name, detail, detail_name):
     template = loader.get_template(name + html)
-    context = Context({name: objects, detail_name: detail})
+    context = RequestContext(request, {name: objects, detail_name: detail})
     return template.render(context)
 
 
 def index(request):
-    template = loader.get_template("base.html")
-    return HttpResponse(template.render())
+    return HttpResponse(get_template(request, None, "base"))
 
 
 def faculties(request):
     objects = Faculty.objects.all()
-    return HttpResponse(get_template(objects, "faculties"))
+    return HttpResponse(get_template(request, objects, "faculties"))
 
 
 def faculty(request, fac_id):
@@ -37,12 +36,12 @@ def faculty(request, fac_id):
     except Faculty.DoesNotExist:
         raise Http404
     detail = Department.objects.filter(faculty=fac_id)
-    return HttpResponse(get_template_with_detail(obj, "faculty", detail, "departments"))
+    return HttpResponse(get_template_with_detail(request, obj, "faculty", detail, "departments"))
 
 
 def departments(request):
     objects = Department.objects.all()
-    return HttpResponse(get_template(objects, "departments"))
+    return HttpResponse(get_template(request, objects, "departments"))
 
 
 def department(request, dep_id):
@@ -51,12 +50,12 @@ def department(request, dep_id):
     except Department.DoesNotExist:
         raise Http404
     detail = Speciality.objects.filter(department=dep_id)
-    return HttpResponse(get_template_with_detail(obj, "department", detail, "specialities"))
+    return HttpResponse(get_template_with_detail(request, obj, "department", detail, "specialities"))
 
 
 def specialities(request):
     objects = Speciality.objects.all()
-    return HttpResponse(get_template(objects, "specialities"))
+    return HttpResponse(get_template(request, objects, "specialities"))
 
 
 def specialitiy(request, spec_id):
@@ -68,7 +67,7 @@ def specialitiy(request, spec_id):
         detail = Group.objects.filter(speciality=spec_id)
     else:
         detail = None
-    return HttpResponse(get_template_with_detail(obj, "speciality", detail, "groups"))
+    return HttpResponse(get_template_with_detail(request, obj, "speciality", detail, "groups"))
 
 
 def groups(request):
@@ -76,7 +75,7 @@ def groups(request):
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
     objects = Group.objects.all()
-    return HttpResponse(get_template(objects, "groups"))
+    return HttpResponse(get_template(request, objects, "groups"))
 
 
 def group(request, group_id):
@@ -88,7 +87,7 @@ def group(request, group_id):
     except Group.DoesNotExist:
         raise Http404
     detail = Student.objects.filter(group=obj)
-    return HttpResponse(get_template_with_detail(obj, "group", detail, "students"))
+    return HttpResponse(get_template_with_detail(request, obj, "group", detail, "students"))
 
 
 def students(request):
@@ -96,7 +95,7 @@ def students(request):
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
     objects = Student.objects.all()
-    return HttpResponse(get_template(objects, "students"))
+    return HttpResponse(get_template(request, objects, "students"))
 
 
 def student(request, student_number):
@@ -107,4 +106,4 @@ def student(request, student_number):
         obj = Student.objects.get(number=student_number)
     except Student.DoesNotExist:
         raise Http404
-    return HttpResponse(get_template(obj, "student"))
+    return HttpResponse(get_template(request, obj, "student"))

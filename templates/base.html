@@ -10,7 +10,16 @@
     <script type="text/javascript" src="{% static 'script.js' %}" charset="utf-8"></script>
 </head>
 <body>
-<div class="login"><a href="/login/">Авторизация</a></div>
+<div class="login">
+    <ul>
+        {% if user.is_authenticated %}
+            <li><p>{{ user.username }}</p></li>
+            <li><a href="/logout/">Выйти</a></li>
+        {% else %}
+            <li><a href="/login/">Авторизация</a></li>
+        {% endif %}
+    </ul>
+</div>
 <div id="menu">
     <ul>
         <li><a href="/">Главная</a></li>
