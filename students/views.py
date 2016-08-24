@@ -1,9 +1,12 @@
 # coding: utf-8
 from django.http import Http404
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.template import RequestContext
 from django.template import loader
 
+from students.forms import StudentForm, GroupForm
 from students.models import Student, Group, Speciality, Faculty, Department
 
 html = ".html"
@@ -90,6 +93,17 @@ def group(request, group_id):
     return HttpResponse(get_template_with_detail(request, obj, "group", detail, "students"))
 
 
+def group_add(request):
+    if request.method == 'POST':
+        form = GroupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/groups/')
+    else:
+        form = GroupForm()
+    return render(request, 'add.html', {'form': form})
+
+
 def students(request):
     if not request.user.is_authenticated():
         template = loader.get_template("login_error.html")
@@ -107,3 +121,14 @@ def student(request, student_number):
     except Student.DoesNotExist:
         raise Http404
     return HttpResponse(get_template(request, obj, "student"))
+
+
+def student_add(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/students/')
+    else:
+        form = StudentForm()
+    return render(request, 'add.html', {'form': form})

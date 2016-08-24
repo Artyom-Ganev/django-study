@@ -1,6 +1,7 @@
 @charset "utf-8";
 body {
     background-color: whitesmoke;
+    font-family: "Lucida Grande", Verdana, Arial, sans-serif;
 }
 
 table {
@@ -22,17 +23,22 @@ a:link {
 }
 
 a:hover {
-    color: darkorchid;
+    color: darkmagenta;
 }
 
 .login {
     position: fixed;
     right: 20px;
-    margin-bottom: 20px;
+    top: 0;
+    margin-bottom: 50px;
 }
 
-#login {
+.login li {
+    display: inline-block;
+}
 
+#login li {
+    display: inline-block;
 }
 
 #register {
@@ -41,7 +47,7 @@ a:hover {
 
 #menu {
     position: relative;
-    top: 30px;
+    top: 40px;
     background-color: darkgray;
     border-radius: 6px;
     margin: 20px auto 20px;
@@ -53,9 +59,36 @@ a:hover {
     padding: 10px;
 }
 
+#menu li:hover {
+    background-color: lightsteelblue;
+}
+
+#menu a:hover {
+    color: darkblue;
+}
+
 #main {
     position: relative;
     top: 30px
+}
+
+.button {
+    padding: 10px;
+    margin: 20px;
+    background-color: darkgray;
+    border-radius: 6px;
+    border-style: none;
+    width: 10%;
+    text-align: center;
+    color: darkblue;
+}
+
+.button:hover {
+    background-color: lightsteelblue;
+}
+
+.button a {
+    color: darkblue;
 }
 
 #footer {
