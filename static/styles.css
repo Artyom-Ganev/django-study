@@ -28,7 +28,7 @@ a:hover {
 
 .login {
     position: fixed;
-    right: 20px;
+    right: 30px;
     top: 0;
     margin-bottom: 50px;
 }
@@ -37,20 +37,33 @@ a:hover {
     display: inline-block;
 }
 
+.login a:hover {
+    background-color: lightsteelblue;
+    cursor: pointer;
+}
+
+.login a {
+    text-align: center;
+    padding: 10px;
+    background-color: darkgray;
+    border-radius: 6px;
+    border-style: none;
+    color: darkblue;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
 #login li {
     display: inline-block;
 }
 
-#register {
-
-}
-
 #menu {
     position: relative;
-    top: 40px;
+    top: 45px;
     background-color: darkgray;
     border-radius: 6px;
-    margin: 20px auto 20px;
+    margin: 20px auto 50px;
     text-align: center;
 }
 
