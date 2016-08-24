@@ -13,7 +13,9 @@ urlpatterns = [
     url(r'^groups/$', views.groups, name='groups'),
     url(r'^groups/(?P<group_id>\d+)/$', views.group, name='group'),
     url(r'^group-add/$', views.group_add, name='group-add'),
+    url(r'^group-delete/(?P<group_id>\d+)/$', views.group_delete, name='group-delete'),
     url(r'^students/$', views.students, name='students'),
     url(r'^students/(?P<student_number>\d+)/$', views.student, name='student'),
     url(r'^student-add/$', views.student_add, name='student-add'),
+    url(r'^student-delete/(?P<student_number>\d+)/$', views.student_delete, name='student-delete'),
 ]

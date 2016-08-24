@@ -5,4 +5,6 @@
     <p>Имя: {{ student.name }}</p>
     <p>Отчество: {{ student.middle_name }}</p>
     <p>Дата рождения: {{ student.birth_date }}</p>
+    <div class="button"><a href="/student-edit/{{ student.number }}">Редактировать</a></div>
+    <div class="button" id="delete_btn"><a href="/student-delete/{{ student.number }}">Удалить</a></div>
 {% endblock %}

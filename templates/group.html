@@ -25,4 +25,6 @@
             </tbody>
         </table>
     {% endif %}
+    <div class="button"><a href="/group-edit/{{ group.id }}">Редактировать</a></div>
+    <div class="button" id="delete_btn"><a href="/group-delete/{{ group.id }}">Удалить</a></div>
 {% endblock %}

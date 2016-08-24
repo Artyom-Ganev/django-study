@@ -94,6 +94,9 @@ def group(request, group_id):
 
 
 def group_add(request):
+    if not request.user.is_authenticated():
+        template = loader.get_template("login_error.html")
+        return HttpResponse(template.render())
     if request.method == 'POST':
         form = GroupForm(request.POST)
         if form.is_valid():
@@ -102,6 +105,18 @@ def group_add(request):
     else:
         form = GroupForm()
     return render(request, 'add.html', {'form': form})
+
+
+def group_delete(request, group_id):
+    if not request.user.is_authenticated():
+        template = loader.get_template("login_error.html")
+        return HttpResponse(template.render())
+    try:
+        obj = Group.objects.get(id=group_id)
+    except Student.DoesNotExist:
+        raise Http404
+    obj.delete()
+    return HttpResponseRedirect('/groups/')
 
 
 def students(request):
@@ -124,6 +139,9 @@ def student(request, student_number):
 
 
 def student_add(request):
+    if not request.user.is_authenticated():
+        template = loader.get_template("login_error.html")
+        return HttpResponse(template.render())
     if request.method == 'POST':
         form = StudentForm(request.POST)
         if form.is_valid():
@@ -132,3 +150,15 @@ def student_add(request):
     else:
         form = StudentForm()
     return render(request, 'add.html', {'form': form})
+
+
+def student_delete(request, student_number):
+    if not request.user.is_authenticated():
+        template = loader.get_template("login_error.html")
+        return HttpResponse(template.render())
+    try:
+        obj = Student.objects.get(number=student_number)
+    except Student.DoesNotExist:
+        raise Http404
+    obj.delete()
+    return HttpResponseRedirect('/students/')
