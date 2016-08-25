@@ -1,27 +1,32 @@
 {% extends "base.html" %}
 {% block main %}
     <!--suppress ALL -->
+    <h1>Общий список студентов</h1>
     <table rules="all">
         <thead>
         <tr class="table_head">
             <td>Группа</td>
+            <td>№ с/б</td>
             <td>Фамилия</td>
             <td>Имя</td>
             <td>Отчество</td>
-            <td>№ с/б</td>
+            <td>Дата рождения</td>
         </tr>
         </thead>
         <tbody>
         {% for student in students %}
             <tr>
                 <td><a href="/groups/{{ student.group.id }}/">{{ student.group }}</a></td>
+                <td><a href="/students/{{ student.number }}/">{{ student.number }}</a></td>
                 <td><a href="/students/{{ student.number }}/">{{ student.surname }}</a></td>
                 <td><a href="/students/{{ student.number }}/">{{ student.name }}</a></td>
                 <td><a href="/students/{{ student.number }}/">{{ student.middle_name }}</a></td>
-                <td><a href="/students/{{ student.number }}/">{{ student.number }}</a></td>
+                <td><a href="/students/{{ student.number }}/">{{ student.birth_date }}</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     <div class="button"><a href="/student-add/">Добавить</a></div>
+    <div class="button"><a href="/students-search/">Поиск</a></div>
+    <div class="button"><a href="/student-filter/">Фильтрация</a></div>
 {% endblock %}
