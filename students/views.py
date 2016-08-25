@@ -25,7 +25,7 @@ def get_template_with_detail(request, objects, name, detail, detail_name):
 
 
 def index(request):
-    return HttpResponse(get_template(request, None, "base"))
+    return HttpResponse(get_template(request, None, "index"))
 
 
 def faculties(request):

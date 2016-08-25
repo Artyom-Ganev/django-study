@@ -59,8 +59,10 @@ a:hover {
     width: 100%;
 }
 
-#login li {
-    display: inline-block;
+#login {
+    position: fixed;
+    left: 20px;
+    top: 120px;
 }
 
 #menu {
@@ -112,6 +114,20 @@ a:hover {
     display: block;
     height: 100%;
     width: 100%;
+}
+
+#about {
+    position: fixed;
+    top: 120px;
+    left: 30%;
+}
+
+#news {
+    text-align: center;
+    position: fixed;
+    right: 20px;
+    top: 120px;
+    width: 30%;
 }
 
 #footer {
