@@ -74,19 +74,26 @@ def specialitiy(request, spec_id):
 
 
 def groups(request):
-    if not request.user.is_authenticated():
+    user = request.user
+    if not user.is_authenticated():
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
-    objects = Group.objects.all()
+    if user.is_staff:
+        objects = Group.objects.all()
+    else:
+        objects = Group.objects.filter(username=user.username)
     return HttpResponse(get_template(request, objects, "groups"))
 
 
 def group(request, group_id):
-    if not request.user.is_authenticated():
+    user = request.user
+    if not user.is_authenticated():
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
     try:
         obj = Group.objects.get(id=group_id)
+        if (obj.username != user.username) & (not user.is_staff):
+            return HttpResponse('Нет прав на просмотр записи')
     except Group.DoesNotExist:
         raise Http404
     detail = Student.objects.filter(group=obj)
@@ -94,13 +101,14 @@ def group(request, group_id):
 
 
 def group_add(request):
-    if not request.user.is_authenticated():
+    user = request.user
+    if not user.is_authenticated():
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
     if request.method == 'POST':
         form = GroupForm(request.POST)
         if form.is_valid():
-            form.save()
+            form.save(user.username)
             return HttpResponseRedirect('/groups/')
     else:
         form = GroupForm()
@@ -108,11 +116,14 @@ def group_add(request):
 
 
 def group_delete(request, group_id):
-    if not request.user.is_authenticated():
+    user = request.user
+    if not user.is_authenticated():
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
     try:
         obj = Group.objects.get(id=group_id)
+        if (obj.username != user.username) & (not user.is_staff):
+            return HttpResponse('Нет прав на удаление записи')
     except Student.DoesNotExist:
         raise Http404
     obj.delete()
@@ -120,17 +131,20 @@ def group_delete(request, group_id):
 
 
 def group_edit(request, group_id):
-    if not request.user.is_authenticated():
+    user = request.user
+    if not user.is_authenticated():
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
     try:
         obj = Group.objects.get(id=group_id)
+        if (obj.username != user.username) & (not user.is_staff):
+            return HttpResponse('Нет прав на удаление записи')
     except Student.DoesNotExist:
         raise Http404
     if request.method == 'POST':
         form = GroupForm(request.POST, instance=obj)
         if form.is_valid():
-            form.save()
+            form.save(user.username)
             return HttpResponseRedirect('/groups/' + group_id)
     form = GroupForm(instance=obj)
     form.action = ''
@@ -138,32 +152,40 @@ def group_edit(request, group_id):
 
 
 def students(request):
-    if not request.user.is_authenticated():
+    user = request.user
+    if not user.is_authenticated():
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
-    objects = Student.objects.all()
+    if user.is_staff:
+        objects = Student.objects.all()
+    else:
+        objects = Student.objects.filter(username=user.username)
     return HttpResponse(get_template(request, objects, "students"))
 
 
 def student(request, student_number):
-    if not request.user.is_authenticated():
+    user = request.user
+    if not user.is_authenticated():
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
     try:
         obj = Student.objects.get(number=student_number)
+        if (obj.username != user.username) & (not user.is_staff):
+            return HttpResponse('Нет прав на просмотр записи')
     except Student.DoesNotExist:
         raise Http404
     return HttpResponse(get_template(request, obj, "student"))
 
 
 def student_add(request):
-    if not request.user.is_authenticated():
+    user = request.user
+    if not user.is_authenticated():
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
     if request.method == 'POST':
         form = StudentForm(request.POST)
         if form.is_valid():
-            form.save()
+            form.save(user.username)
             return HttpResponseRedirect('/students/')
     else:
         form = StudentForm()
@@ -171,11 +193,14 @@ def student_add(request):
 
 
 def student_delete(request, student_number):
-    if not request.user.is_authenticated():
+    user = request.user
+    if not user.is_authenticated():
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
     try:
         obj = Student.objects.get(number=student_number)
+        if (obj.username != user.username) & (not user.is_staff):
+            return HttpResponse('Нет прав на удаление записи')
     except Student.DoesNotExist:
         raise Http404
     obj.delete()
@@ -183,7 +208,8 @@ def student_delete(request, student_number):
 
 
 def student_edit(request, student_number):
-    if not request.user.is_authenticated():
+    user = request.user
+    if not user.is_authenticated():
         template = loader.get_template("login_error.html")
         return HttpResponse(template.render())
     try:
@@ -193,7 +219,7 @@ def student_edit(request, student_number):
     if request.method == 'POST':
         form = StudentForm(request.POST, instance=obj)
         if form.is_valid():
-            form.save()
+            form.save(user.username)
             return HttpResponseRedirect('/students/' + student_number)
     form = StudentForm(instance=obj)
     form.action = ''

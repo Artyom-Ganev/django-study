@@ -2,7 +2,14 @@
 from django.db import models
 
 
-class Named(models.Model):
+class UserInfo(models.Model):
+    username = models.CharField(max_length=100, null=False, blank=False, editable=False)
+
+    class Meta:
+        abstract = True
+
+
+class Named(UserInfo):
     name = models.CharField(max_length=100, unique=True)
 
     class Meta:
@@ -12,7 +19,7 @@ class Named(models.Model):
         return self.name
 
 
-class Human(models.Model):
+class Human(UserInfo):
     SEX_CHOICES = (
         ('m', u"мужской"),
         ('w', u"женский"),
